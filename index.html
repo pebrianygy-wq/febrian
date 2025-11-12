@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Penjualan Kaos Kaki Coding</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 { margin: 0; }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .product {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .product img {
+            max-width: 150px;
+            margin-right: 20px;
+            border-radius: 8px;
+        }
+        .product-info { flex-grow: 1; }
+        .price {
+            font-weight: bold;
+            color: #4a90e2;
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        button {
+            background-color: #FFD700; /* warna keranjang kuning */
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        button:hover { background-color: #e6c200; }
+        #cart {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 30px;
+        }
+        #cart h2 { margin-top: 0; }
+        #cart ul { list-style-type: none; padding: 0; }
+        #cart li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #total {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #4a90e2;
+        }
+        .remove-btn {
+            background-color: #e74c3c;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            border-radius: 4px;
+            color: white;
+        }
+        .remove-btn:hover { background-color: #c0392b; }
+        #checkout-section {
+            background: white;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        #checkout-section input, #checkout-section select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ddd;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Penjualan Kaos Kaki Coding</h1>
+        <p>Kaos kaki keren untuk para programmer!</p>
+    </header>
+
+    <div class="container">
+        <!-- PRODUK -->
+        <div class="product">
+            <img src="https://down-id.img.susercontent.com/file/id-11134275-7rbkd-m7xeb8yi3q4ib8" alt="Kaos Kaki Nike">
+            <div class="product-info">
+                <h2>Kaos Kaki "Nike"</h2> 
+                <p>Bahan berkualitas dan nyaman dipakai.</p>
+                <div class="price" data-price="50000">Rp50.000</div>
+                <button class="add-to-cart">Tambah ke Keranjang 🛒</button>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/MTA-101375523/adidas_adidas_unisex_ankle_socks_linear_cushion_3-pairs_kaos_kaki_-ic1304-_full02_glh4w7cs.jpeg" alt="Kaos Kaki Adidas">
+            <div class="product-info">
+                <h2>Kaos Kaki Hitam "Adidas"</h2>
+                <p>Kaos kaki adidas nyaman dipakai dan bahan berkualitas.</p>
+                <div class="price" data-price="35000">Rp35.000</div>
+                <button class="add-to-cart">Tambah ke Keranjang 🛒</button>
+            </div>
+        </div>
+
+        <!-- KERANJANG -->
+        <div id="cart">
+            <h2>🛒 Keranjang Belanja</h2>
+            <ul id="cart-items"></ul>
+            <div id="total">Total: Rp0</div>
+            <button id="clear-cart" style="margin-top:10px;background-color:#e74c3c;color:white;">Hapus Semua</button>
+        </div>
+
+        <!-- FORM CHECKOUT -->
+        <div id="checkout-section">
+            <h2>Checkout & Biodata Pemesan</h2>
+            <form id="checkout-form">
+                <label>Nama Lengkap:</label>
+                <input type="text" id="nama" required />
+
+                <label>Alamat Lengkap:</label>
+                <input type="text" id="alamat" required />
+
+                <label>No. HP / WhatsApp:</label>
+                <input type="text" id="nohp" required />
+
+                <label>Metode Pembayaran:</label>
+                <select id="metode" required>
+                    <option value="">-- Pilih Metode Pembayaran --</option>
+                    <option value="tunai">Tunai (Bayar di Tempat)</option>
+                    <option value="transfer">Transfer Bank (BCA, BRI, Mandiri)</option>
+                    <option value="ewallet_dana">E-Wallet (DANA)</option>
+                    <option value="ewallet_shopee">E-Wallet (ShopeePay)</option>
+                    <option value="ewallet_gopay">E-Wallet (GoPay)</option>
+                </select>
+
+                <button type="submit" style="background-color:#4a90e2;color:white;">Checkout Sekarang ✅</button>
+            </form>
+            <div id="checkout-result" style="margin-top:15px;color:green;font-weight:bold;"></div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; Alamat: Jl. Galunggung No.78 RT 08<br>
+        Telp: 0838-4471-6445<br>
+        Nama Olshop: Briizzcorr
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.add-to-cart');
+        const cartItems = document.getElementById('cart-items');
+        const totalElement = document.getElementById('total');
+        const clearCartButton = document.getElementById('clear-cart');
+        const checkoutForm = document.getElementById('checkout-form');
+        const checkoutResult = document.getElementById('checkout-result');
+        let cart = [];
+
+        // Tambah ke keranjang
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.parentElement;
+                const name = product.querySelector('h2').innerText;
+                const price = parseInt(product.querySelector('.price').dataset.price);
+
+                const existing = cart.find(item => item.name === name);
+                if (existing) {
+                    existing.qty += 1;
+                } else {
+                    cart.push({ name, price, qty: 1 });
+                }
+                renderCart();
+            });
+        });
+
+        // Render isi keranjang
+        function renderCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                const itemTotal = item.price * item.qty;
+                li.innerHTML = `
+                    ${item.name} (x${item.qty}) - Rp${itemTotal.toLocaleString('id-ID')}
+                    <button class="remove-btn" onclick="removeItem(${index})">Hapus</button>
+                `;
+                cartItems.appendChild(li);
+                total += itemTotal;
+            });
+            totalElement.textContent = `Total: Rp${total.toLocaleString('id-ID')}`;
+        }
+
+        // Hapus 1 produk
+        function removeItem(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        // Hapus semua
+        clearCartButton.addEventListener('click', function() {
+            cart = [];
+            renderCart();
+        });
+
+        // Checkout Form
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert("Keranjang masih kosong!");
+                return;
+            }
+
+            const nama = document.getElementById('nama').value;
+            const alamat = document.getElementById('alamat').value;
+            const nohp = document.getElementById('nohp').value;
+            const metode = document.getElementById('metode').value;
+
+            let metodeText = "";
+            switch (metode) {
+                case "tunai": metodeText = "Tunai (Bayar di Tempat)"; break;
+                case "transfer": metodeText = "Transfer ke Bank (BCA/BRI/Mandiri)"; break;
+                case "ewallet_dana": metodeText = "E-Wallet DANA"; break;
+                case "ewallet_shopee": metodeText = "E-Wallet ShopeePay"; break;
+                case "ewallet_gopay": metodeText = "E-Wallet GoPay"; break;
+            }
+
+            let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            checkoutResult.innerHTML = `
+                ✅ Terima kasih, <b>${nama}</b>! Pesanan kamu telah diterima.<br>
+                📦 Total Belanja: <b>Rp${total.toLocaleString('id-ID')}</b><br>
+                💳 Metode Pembayaran: <b>${metodeText}</b><br>
+                📍 Alamat: ${alamat}<br>
+                📱 No HP: ${nohp}<br><br>
+                Silakan lanjutkan pembayaran sesuai metode yang dipilih.
+            `;
+
+            // Reset form dan keranjang
+            cart = [];
+            renderCart();
+            checkoutForm.reset();
+        });
+    </script>
+</body>
+</html>
